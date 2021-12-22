@@ -14,7 +14,7 @@ whenever sqlerror exit sql.sqlcode rollback
 begin
 wwv_flow_api.import_begin (
  p_version_yyyy_mm_dd=>'2021.10.15'
-,p_release=>'21.2.0-18'
+,p_release=>'21.2.0'
 ,p_default_workspace_id=>23143523579627459721
 ,p_default_application_id=>94413
 ,p_default_id_offset=>0
@@ -28,12 +28,12 @@ prompt APPLICATION 94413 - Noaa Timesheet V3
 -- Application Export:
 --   Application:     94413
 --   Name:            Noaa Timesheet V3
---   Date and Time:   12:50 Wednesday November 3, 2021
+--   Date and Time:   12:49 Wednesday December 22, 2021
 --   Exported By:     JSQCONTRACTTOHIRE@YAHOO.COM
 --   Flashback:       0
 --   Export Type:     Application Export
 --     Pages:                     34
---       Items:                   83
+--       Items:                   82
 --       Validations:              1
 --       Processes:               32
 --       Regions:                 77
@@ -70,7 +70,7 @@ prompt APPLICATION 94413 - Noaa Timesheet V3
 --       Reports:
 --       E-Mail:
 --     Supporting Objects:  Included
---   Version:         21.2.0-18
+--   Version:         21.2.0
 --   Instance ID:     63113759365424
 --
 
@@ -121,7 +121,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'Noaa Timesheet V3'
 ,p_last_updated_by=>'JSQCONTRACTTOHIRE@YAHOO.COM'
-,p_last_upd_yyyymmddhh24miss=>'20211028144029'
+,p_last_upd_yyyymmddhh24miss=>'20211222124837'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>3
 ,p_ui_type_name => null
@@ -156,16 +156,16 @@ wwv_flow_api.create_list_item(
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(30966504223979906306)
 ,p_list_item_display_sequence=>30
-,p_list_item_link_text=>'Noaa Timesheet V2 Search'
-,p_list_item_link_target=>'f?p=&APP_ID.:3:&APP_SESSION.::&DEBUG.:'
+,p_list_item_link_text=>'Noaa Timesheet V3 Search'
+,p_list_item_link_target=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-table-search'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(30966511709178906360)
 ,p_list_item_display_sequence=>40
-,p_list_item_link_text=>'Noaa Timesheet V2 Report'
-,p_list_item_link_target=>'f?p=&APP_ID.:4:&APP_SESSION.::&DEBUG.:'
+,p_list_item_link_text=>'Noaa Timesheet V3 Report'
+,p_list_item_link_target=>'f?p=&APP_ID.:4:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-table'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
@@ -14701,11 +14701,11 @@ wwv_flow_api.create_page(
 ,p_user_interface_id=>wwv_flow_api.id(30966485774057906265)
 ,p_name=>'Dashboard'
 ,p_alias=>'DASHBOARD'
-,p_step_title=>'Dashboard'
+,p_step_title=>'Time Dashboard'
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'JSQCONTRACTTOHIRE@YAHOO.COM'
-,p_last_upd_yyyymmddhh24miss=>'20210831201538'
+,p_last_upd_yyyymmddhh24miss=>'20211222124837'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30966501827006906304)
@@ -15048,8 +15048,8 @@ wwv_flow_api.create_page(
  p_id=>4
 ,p_user_interface_id=>wwv_flow_api.id(30966485774057906265)
 ,p_name=>'Noaa Timesheet V3 Report'
-,p_alias=>'NOAA-TIMESHEET-V2-REPORT'
-,p_step_title=>'Noaa Timesheet V3 Report'
+,p_alias=>'NOAA-TIMESHEET-V3-REPORT'
+,p_step_title=>'Noaa Timesheet V3 Report2'
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -15064,7 +15064,7 @@ wwv_flow_api.create_page(
 '',
 '<p>Click the <strong>Reset</strong> button to reset the interactive report back to the default settings.</p>'))
 ,p_last_updated_by=>'JSQCONTRACTTOHIRE@YAHOO.COM'
-,p_last_upd_yyyymmddhh24miss=>'20210929150352'
+,p_last_upd_yyyymmddhh24miss=>'20211129131003'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30966512415089906361)
@@ -15264,24 +15264,6 @@ wwv_flow_api.create_page_item(
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'A3L'
 ,p_attribute_10=>'FMT12'
-);
-wwv_flow_api.create_page_item(
- p_id=>wwv_flow_api.id(30623470214388822733)
-,p_name=>'P4_NEW_1'
-,p_item_sequence=>10
-,p_item_plug_id=>wwv_flow_api.id(30966512415089906361)
-,p_prompt=>'Afternoon Clock Out'
-,p_source=>'SELECT SUBSTR((to_timestamp(:P90_LUNCH_CLOCK_OUT, ''HH24:MI'') - to_timestamp(:P90_MORNING_CLOCK_IN, ''HH24:MI'')), 11, 6 ) from NOAA_TIMESHEET_V2 WHERE NOAA_TIMESHEET_V2.ID = :ID;'
-,p_source_type=>'QUERY'
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_field_template=>wwv_flow_api.id(30966458719896906247)
-,p_item_template_options=>'#DEFAULT#'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_api.create_page_da_event(
  p_id=>wwv_flow_api.id(30966518284799906367)
